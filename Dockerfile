@@ -6,3 +6,5 @@ RUN apt-get update
 # RUN service nginx start
 # EXPOSE 80
 CMD [“echo”,”Image created”] 
+
+
