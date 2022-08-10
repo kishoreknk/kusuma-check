@@ -10,7 +10,7 @@
 		<meta charset="utf-8">
 		<title>Welcome</title>
 	</head> 
-	<center><h1>WELCOME TO Microdegree! </h1></center>
+	<center><h1>WELCOME TO AutoDeployment Page! </h1></center>
 	<body>
 		<c:url value="/showMessage.html" var="messageUrl" />
 		<a href="${messageUrl}">Click to enter</a><br>
