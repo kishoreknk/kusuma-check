@@ -1,8 +1,3 @@
-FROM ubuntu 
+FROM tomcat:8.5.47-jdk8-openjdk
 MAINTAINER mithunec@gmail.com
-
-RUN apt-get update 
-# RUN apt-get install apache –y 
-# RUN service nginx start
-# EXPOSE 80
-CMD [“echo”,”Image created”] 
+COPY target/myapp*.war /usr/local/tomcat/webapps/
