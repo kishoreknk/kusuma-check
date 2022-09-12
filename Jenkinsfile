@@ -1,11 +1,5 @@
 pipeline{
     agent any
-//     agent{
-//         node {
-//         label 'new-agent'
-//         customWorkspace '/home/ubuntu/workspace'
-//     }
-    }
     tools{
     maven 'maven3.8.6'
     }
@@ -17,7 +11,7 @@ pipeline{
                     git credentialsId: 'github', url: 'https://github.com/mithunmarvel/DevOps_Project.git'
                     }
                 
-        }
+            }
         stage("Maven Build"){
             steps{
                 echo "Maven Build"
@@ -35,19 +29,17 @@ pipeline{
                 
 //             }
 //         }
-    }
+//     }
     
-}
+// }
 
 
 stage('Docker Build') {
-    	agent any
       steps {
       	sh 'docker build -t smithun/myapp:latest .'
       }
     }
-    stage('Docker Push') {
-    	agent any
+stage('Docker Push') {
       steps {
       	withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
         	sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}"
@@ -56,4 +48,4 @@ stage('Docker Build') {
       }
     }
   }
-}
+
