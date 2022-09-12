@@ -22,30 +22,19 @@ pipeline{
             }
         }
         
-//         stage("deploy"){
-//             steps{
-//                 echo "Deploy Step"
-//                 deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://18.144.163.23:9090')], contextPath: null, war: '*/*.war'
-                
-//             }
-//         }
-//     }
-    
-// }
 
-
-stage('Docker Build') {
-      steps {
-      	sh 'docker build -t smithun/myapp:latest .'
-      }
-    }
-stage('Docker Push') {
-      steps {
-      	withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
-        	sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}"
-          sh 'docker push smithun/myapp:latest'
-        }
-      }
-    }
-  }
+        stage('Docker Build') {
+              steps {
+                sh 'docker build -t smithun/myapp:latest .'
+              }
+            }
+        stage('Docker Push') {
+              steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
+                    sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}"
+                  sh 'docker push smithun/myapp:latest'
+                }
+              }
+            }
+          }
 
