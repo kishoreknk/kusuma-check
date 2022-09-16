@@ -8,7 +8,7 @@ pipeline{
             steps{
                 echo "GitClone"
                
-                    git credentialsId: 'github', url: 'https://github.com/mithunmarvel/DevOps_Project.git'
+                    git credentialsId: 'github', url: 'https://github.com/kusumaBE/docker.git'
                     }
                 
             }
@@ -25,14 +25,14 @@ pipeline{
 
         stage('Docker Build') {
               steps {
-                sh 'docker build -t smithun/myapp:latest .'
+                sh 'docker build -t kusumabe/myapp:latest .'
               }
             }
         stage('Docker Push') {
               steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
                     sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}"
-                  sh 'docker push smithun/myapp:latest'
+                  sh 'docker push kusumabe/myapp:latest'
                 }
               }
             }
