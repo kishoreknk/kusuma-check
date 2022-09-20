@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools{
-    maven 'maven'
+    maven 'Maven'
     }
     stages{
         stage("GitClone"){
@@ -25,14 +25,14 @@ pipeline{
 
         stage('Docker Build') {
               steps {
-                sh 'docker build -t kusumabe/myapp:latest .'
+                sh 'docker build -t kishoreknk/myapp:latest .'
               }
             }
         stage('Docker Push') {
               steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
                     sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}"
-                  sh 'docker push kusumabe/myapp:latest'
+                  sh 'docker push kishoreknk/myapp:latest'
                 }
               }
             }
